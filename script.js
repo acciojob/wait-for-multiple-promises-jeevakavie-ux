@@ -1,17 +1,18 @@
 //your JS code here. If required.
 const output = document.getElementById("output");
 
+output.innerHTML = `
+    <tr>
+	    <td colspan="2">Loading...</td>
+		</tr>
+`;
+
 function createPromise() {
     return new Promise((resolve) => {
-        const start = performance.now();
-
         const delay = Math.floor(Math.random() * 3) + 1;
 
         setTimeout(() => {
-            const end = performance.now();
-            const time = (end - start) / 1000;
-
-            resolve(time);
+            resolve(delay);
         }, delay * 1000);
     });
 }
@@ -24,9 +25,8 @@ const startTime = performance.now();
 
 Promise.all([promise1, promise2, promise3])
     .then((results) => {
-        const totalTime = (performance.now() - startTime) / 1000;
-
-        output.innerHTML = "";
+        
+         output.innerHTML = "";
 
         results.forEach((time, index) => {
             const row = document.createElement("tr");
@@ -39,7 +39,9 @@ Promise.all([promise1, promise2, promise3])
             output.appendChild(row);
         });
 
-        const totalRow = document.createElement("tr");
+		const total = Math.max(...results);
+
+        const totalRow= document.createElement("tr");
 
         totalRow.innerHTML = `
             <td>Total</td>
@@ -47,4 +49,4 @@ Promise.all([promise1, promise2, promise3])
         `;
 
         output.appendChild(totalRow);
-    });
+ });
