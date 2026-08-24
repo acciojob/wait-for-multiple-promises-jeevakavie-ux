@@ -45,7 +45,7 @@ Promise.all([promise1, promise2, promise3])
 
         totalRow.innerHTML = `
             <td>Total</td>
-            <td>${totalTime.toFixed(3)}</td>
+            <td>${total.toFixed(3)}</td>
         `;
 
         output.appendChild(totalRow);
